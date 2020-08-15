@@ -4,16 +4,36 @@ import React, { Component } from 'react';
 
 class App extends Component {
   state = {
-    foods: foods
+    foods: foods,
+    showForm: false,
   };
 
   showFood = () => {
-    return this.state.foods.map(eachFood => {
+    return this.state.foods.map((eachFood) => {
       return <FoodBox {...eachFood} />;
     });
   };
+
+  toggleForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
+    });
+  };
+
   render() {
-    return <div>{this.showFood()}</div>;
+    return (
+      <div>
+        <button onClick={this.toggleForm}>Add Foods</button>
+        {this.state.showForm ? (
+          <form>
+            <input />
+          </form>
+        ) : (
+          'No form'
+        )}
+        {this.showFood()}
+      </div>
+    );
   }
 }
 export default App;
